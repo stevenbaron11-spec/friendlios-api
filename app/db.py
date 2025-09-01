@@ -26,7 +26,6 @@ async def exec_sql(sql: str, params: tuple | list | None = None):
     async with get_conn() as (_, cur):
         await cur.execute(sql, params or ())
 
-# --- Core RPCs ---
 async def rpc_store_photo_embedding(photo_id: str, vec: list[float]):
     sql = "select public.store_photo_embedding(%s, %s::vector);"
     async with get_conn() as (_, cur):
@@ -48,7 +47,6 @@ async def rpc_confirm_match(sighting_id: str, chosen_dog_id: str | None, display
         row = await cur.fetchone()
         return row["confirm_match"]
 
-# --- Analysis RPCs ---
 async def api_upsert_photo_analysis(photo_id: str, phash_bytes: bytes | None,
                                     lab_hist: list[float] | None,
                                     lbp_hist: list[float] | None,

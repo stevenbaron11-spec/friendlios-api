@@ -2,7 +2,7 @@ def test_analyze_with_url(client, monkeypatch):
     import io
     from PIL import Image
     buf = io.BytesIO()
-    Image.new("RGB", (64,64), color=(128, 80, 40)).save(buf, format="JPEG")
+    Image.new("RGB", (64,64), color=(128,80,40)).save(buf, format="JPEG")
     img_bytes = buf.getvalue()
 
     class Resp:

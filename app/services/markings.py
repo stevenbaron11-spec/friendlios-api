@@ -103,7 +103,7 @@ def nms_boxes(boxes: List[tuple[int,int,int,int]], scores: List[float], iou_thr:
         inter = np.maximum(0.0, xx2 - xx1) * np.maximum(0.0, yy2 - yy1)
         iou = inter / (areas[i] + areas[order[1:]] - inter + 1e-6)
         inds = np.where(iou <= iou_thr)[0]
-        order = order[inds + 1]
+        order = inds + 1 if hasattr(inds, "__len__") else []
     return keep
 
 def pick_distinctive_patches(img: Image.Image, k: int = 5, win: int = 64, stride: int = 32) -> List[tuple[int,int,int,int,float]]:

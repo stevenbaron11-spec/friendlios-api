@@ -10,7 +10,7 @@ class Settings(BaseSettings):
     photos_bucket: str = Field("photos", alias="PHOTOS_BUCKET")
     public_bucket: bool = Field(True, alias="PUBLIC_BUCKET")
 
-    embedder_backend: str = Field("random", alias="EMBEDDER_BACKEND")  # "random" | "onnx"
+    embedder_backend: str = Field("random", alias="EMBEDDER_BACKEND")
     embed_model_path: str = Field("models/dogid.onnx", alias="EMBED_MODEL_PATH")
     embed_vector_size: int = Field(512, alias="EMBED_VECTOR_SIZE")
 

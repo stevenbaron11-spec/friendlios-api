@@ -1,5 +1,4 @@
 def test_match_with_url(client, monkeypatch):
-    # Fake network image fetch
     class Resp:
         def __init__(self, content=b"img"): self.content = content
         def raise_for_status(self): return None
@@ -13,8 +12,8 @@ def test_match_with_url(client, monkeypatch):
 
     r = client.post("/v1/match", json={"photo_url":"https://example.com/dog.jpg","lat":12.34,"lon":56.78,"k":2})
     assert r.status_code == 200
-    assert "candidates" in r.json()
-    assert len(r.json()["candidates"]) == 2
+    js = r.json()
+    assert "candidates" in js and len(js["candidates"]) == 2
 
 def test_confirm(client):
     r = client.post("/v1/confirm", params={"sighting_id":"s1", "chosen_dog_id":"d1"})
